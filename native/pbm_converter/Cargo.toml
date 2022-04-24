@@ -1,0 +1,13 @@
+[package]
+name = "pbm_converter"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[lib]
+name = "pbm_converter"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.25.0"

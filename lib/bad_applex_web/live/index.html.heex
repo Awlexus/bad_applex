@@ -1,0 +1,38 @@
+<% width = max(@width, 960) %>
+<% height = max(@height, 720) %>
+
+<style>
+
+.grid {
+    display: grid;
+    grid-template-columns: <%= for _ <- 1..@width, do: "auto " %>;
+    width: <%= width %>px;
+    height: <%= height %>px;
+}
+
+.item {
+    width: <%= width / @width %>px;
+    height: <%= height / @height %>px;
+}
+
+</style>
+
+<div class="container">
+    <h1>Playing "Bad Apple!" on Phoenix Liveview</h1>
+</div>
+
+<div class="content-container">
+    <div>
+        <div class="grid">
+            <%= for pixel <- @current_frame_data do %>
+                <div class="item" pixel={pixel}></div>
+            <% end %>
+        </div>
+        <p class="centered-text">
+            <b>Resolution:</b> <%= @width %>x<%= @height %><br>
+            <b>Fps:</b> <%= Float.round(@frame_count / (@duration / 1000), 2) %>
+        </p>
+    </div>
+
+    <video id="player" phx-hook="Player" src={Routes.static_path(@socket, "/videos/bad_apple.mkv")} controls />
+</div>
